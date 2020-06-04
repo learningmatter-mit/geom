@@ -16,7 +16,7 @@ ipykernel==5.3.0
 conda upgrade conda
 conda create -n geom python==3.7.5
 ```
-Next activate the environment install `msgpack`:
+Next activate the environment install `msgpack` and `ipykernel`:
 ```bash
 conda activate geom
 pip install msgpack==1.0.0 ipykernel==5.3.0
