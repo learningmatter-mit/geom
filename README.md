@@ -3,7 +3,7 @@ GEOM: Energy-annotated molecular conformations
 GEOM is a dataset with over 30 million molecular conformations annotated by energy and statistical weight for over 400,000 molecules. 
 
 ## Contents
-This repository contains a jupyter notebook tutorial showing how to load the data and extract its contents.   
+This repository contains a [Jupyter notebook tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/loading_data.ipynb) showing how to load the data and extract its contents.   
 
 ## Usage
 This code was tested with the following dependencies:
@@ -25,3 +25,6 @@ To ensure that the `geom` environment is accessible through Jupyter, add the the
 ```bash
 python -m ipykernel install --user --name geom --display-name "Python [conda env:geom"]
 ```
+
+## Accessing the data
+The datasets are available at [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). The four datasets are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/loading_data.ipynb) gives instructions for extracting the files and loading their content.
