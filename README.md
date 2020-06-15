@@ -3,7 +3,7 @@ GEOM: Energy-annotated molecular conformations
 GEOM is a dataset with over 30 million molecular conformations annotated by energy and statistical weight for over 400,000 molecules. 
 
 ## Contents
-This repository contains a [Jupyter notebook tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/loading_data.ipynb) showing how to load the data and extract its contents.   
+This repository contains [Jupyter notebook tutorials](https://github.com/learningmatter-mit/geom/blob/master/tutorials) showing how to load the data and perform analysis.
 
 ## Usage
 This code was tested with the following dependencies:
