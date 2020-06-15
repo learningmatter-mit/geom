@@ -7,14 +7,16 @@ This repository contains [Jupyter notebook tutorials](https://github.com/learnin
 
 ## Usage
 This code was tested with the following dependencies:
+```
 python==3.7.5,
 mgspack==1.0.0,
 ipykernel==5.3.0,
 rdkit==2020.03.2.0,
-matplotlib==3.2.1.
+matplotlib==3.2.1
+```
 
+You can create an [anaconda](https://conda.io/docs/index.html) environment to manage dependencies. You can learn more about managing anaconda environments by reading [this page](http://conda.pydata.org/). First create an environment with Python, RDKit, and Matplotlib:
 
-You can create an anaconda environment to manage dependencies. First create an environment with Python, RDKit, and Matplotlib:
 ```bash
 conda upgrade conda
 conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 -c rdkit -c conda-forge 
