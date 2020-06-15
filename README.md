@@ -9,12 +9,12 @@ This repository contains [Jupyter notebook tutorials](https://github.com/learnin
 This code was tested with the following dependencies:
 python==3.7.5,
 mgspack==1.0.0,
-ipykernel==5.3.0
-rdkit==2020.03.2.0
-matplotlib==3.2.1 
+ipykernel==5.3.0,
+rdkit==2020.03.2.0,
+matplotlib==3.2.1.
 
 
-[MessagePack](https://msgpack.org/index.html) is a binary serialization format that allows you to exchange information among different languages, like JSON, but it is faster and more compact. You can create an anaconda environment to manage dependencies. First create an environment with Python 3.7.5 and RDKit:
+You can create an anaconda environment to manage dependencies. First create an environment with Python, RDKit, and Matplotlib:
 ```bash
 conda upgrade conda
 conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 -c rdkit -c conda-forge 
@@ -34,7 +34,7 @@ python -m ipykernel install --user --name geom --display-name "Python [conda env
 
 ### Language-agnostic data
 
-The datasets are available at [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). There are four datasets that can be loaded by any programming language. They are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/01_loading_data.ipynb) gives instructions for extracting the files and loading their content. 
+The datasets are available at [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). There are four datasets that can be loaded by any programming language. They are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/01_loading_data.ipynb) gives instructions for extracting the files and loading their content using MessagePack. [MessagePack](https://msgpack.org/index.html) is a binary serialization format that allows you to exchange information among different languages, like JSON, but it is faster and more compact. 
 
 ### Python-specific data
 
