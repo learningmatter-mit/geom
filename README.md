@@ -1,5 +1,5 @@
-# GEOM
-GEOM: Energy-annotated molecular conformations
+# GEOM: Energy-annotated molecular conformations 
+
 GEOM is a dataset with over 30 million molecular conformations annotated by energy and statistical weight for over 400,000 molecules. 
 
 ## Contents
@@ -40,7 +40,7 @@ The datasets are available [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AAB
 
 ### Python-specific data
 
-The featurized files contain bond and atom features as lists of dictionaries and are quite large. If you are using Python, it is far more convenient to use the folder `rdkit_folder.tar`. This folder contains files in which the conformer coordinates are replaced by RDKit `mol` objects. These objects contain both the coordinates and all the connectivity information contained in the `featurized` files, but use far less disk space. Moreover, with RDKit you can generate your own 2D and 3D descriptors in a very straightforward way. The [RDKit tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/02_loading_rdkit_mols.ipynb) shows how to load the RDKit files, visualize conformers, generate additional descriptors, and export to PDB. If you are not familiar with RDKit, you can get started at the [RDKit home page](https://www.rdkit.org/docs/index.html).
+The featurized files contain bond and atom features as lists of dictionaries and are quite large. If you are using Python, it is far more convenient to use the folder `rdkit_folder.tar.gz`. This folder contains files in which the conformer coordinates are replaced by RDKit `mol` objects. These objects contain both the coordinates and all the connectivity information contained in the `featurized` files, but use far less disk space. Moreover, with RDKit you can generate your own 2D and 3D descriptors in a very straightforward way. The [RDKit tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/02_loading_rdkit_mols.ipynb) shows how to load the RDKit files, visualize conformers, generate additional descriptors, and export to PDB. If you are not familiar with RDKit, you can get started at the [RDKit home page](https://www.rdkit.org/docs/index.html).
 
 Finally, you may want to analyze only a few molecules based on certain properties (e.g., load 200 molecules that bind SARS-CoV 3CL protease, and 1000 that do not). However, you may not want to first load *all* molecules and *then* filter by properties. In this case you can load the files `rdkit_folder/{drugs,qm9}_summary.json`, which contain all the summary statistics for each molecule, but exclude conformer information. You can use these lightweight files to decide which molecules to load, and then load their RDKit pickle files one-by-one. This, too, is described in the [RDKit tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/02_loading_rdkit_mols.ipynb).
 
