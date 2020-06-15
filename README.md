@@ -10,11 +10,15 @@ This code was tested with the following dependencies:
 python==3.7.5,
 mgspack==1.0.0,
 ipykernel==5.3.0
+rdkit==2020.03.2.0
+matplotlib==3.2.1 
 
-[MessagePack](https://msgpack.org/index.html) is a binary serialization format that allows you to exchange information among different languages, like JSON, but it is faster and more compact. You can create an anaconda environment to manage dependencies. First create an environment with Python 3.7.5:
+
+[MessagePack](https://msgpack.org/index.html) is a binary serialization format that allows you to exchange information among different languages, like JSON, but it is faster and more compact. You can create an anaconda environment to manage dependencies. First create an environment with Python 3.7.5 and RDKit:
 ```bash
 conda upgrade conda
-conda create -n geom python==3.7.5
+conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 -c rdkit -c conda-forge 
+
 ```
 Next activate the environment install `msgpack` and `ipykernel`:
 ```bash
@@ -27,4 +31,18 @@ python -m ipykernel install --user --name geom --display-name "Python [conda env
 ```
 
 ## Accessing the data
-The datasets are available at [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). The four datasets are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/loading_data.ipynb) gives instructions for extracting the files and loading their content.
+
+### Language-agnostic data
+
+The datasets are available at [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). There are four datasets that can be loaded by any programming language. They are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/01_loading_data.ipynb) gives instructions for extracting the files and loading their content. 
+
+### Python-specific data
+
+The featurized files contain bond and atom features as lists of dictionaries and are quite large. If you are using Python, it is far more convenient to load the files `drugs_rdkit.pickle.tar.gz` and `qm9_rdkit.pickle.tar.gz`. These files replace the conformer coordinates with RDKit `mol` objects, which contain both the coordinates and all the connectivity information contained in the `featurized` files, but use far less disk space. Moreover, with RDKit you can generate your own 2D and 3D descriptors in a very straightforward way. The [RDKit tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/02_loading_rdkit_mols.ipynb) shows how to load the RDKit files, visualize conformers, and generate additional descriptors. If you are not familiar with RDKit, you can get started at the RDKit [home page] (https://www.rdkit.org/docs/index.html).
+
+Finally, you may want to analyze only a few molecules based on certain properties (e.g., load 200 molecules that bind SARS-CoV 3CL protease, and 1000 that do not). However, you may not want to first load *all* molecules and *then* filter by properties. In this case you can unzip the file `rdkit_folder.zip`. This folder contains a separate file for every SMILES string. That file, when loaded, contains information about all conformers for that molecule. This way you can load one file at a time for the molecules you are interested in. Inside this folder, the files `drugs_summary.json` and `qm9_summary.json` provide summary properties of each molecule without conformer information. You can use these lightweight files to decide which molecules to load, and then load them one-by-one from the sub-folders `drugs` and `qm9`.
+
+
+
+
+
