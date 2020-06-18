@@ -12,7 +12,8 @@ python==3.7.5,
 mgspack==1.0.0,
 ipykernel==5.3.0,
 rdkit==2020.03.2.0,
-matplotlib==3.2.1
+matplotlib==3.2.1,
+e3fp=1.2.1
 ```
 
 You can create an [anaconda](https://conda.io/docs/index.html) environment to manage dependencies. You can learn more about managing anaconda environments by reading [this page](http://conda.pydata.org/). First create an environment with Python, RDKit, and Matplotlib:
@@ -22,10 +23,10 @@ conda upgrade conda
 conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 -c rdkit -c conda-forge 
 
 ```
-Next activate the environment and install `msgpack` and `ipykernel`:
+Next activate the environment and install `msgpack`, `ipykernel`, and `e3fp`:
 ```bash
 conda activate geom
-pip install msgpack==1.0.0 ipykernel==5.3.0
+pip install msgpack==1.0.0 ipykernel==5.3.0 e3fp==1.2.1
 ```
 To ensure that the `geom` environment is accessible through Jupyter, add the the `geom` display name:
 ```bash
