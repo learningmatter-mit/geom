@@ -53,6 +53,8 @@ python -m ipykernel install --user --name geom --display-name "Python [conda env
 
 The datasets are available [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). There are four datasets that can be loaded by any programming language. They are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [first tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/01_loading_data.ipynb) gives instructions for extracting the files and loading their content using [MessagePack](https://msgpack.org/index.html). MessagePack is a binary serialization format that allows you to exchange information among different languages, like JSON, but it is faster and more compact. 
 
+**Note: we will be updating the Python-specific data below as we add new molecules to GEOM, but we will not be updating the MessagePack files. If you want the new molecules but you don't use Python, please reach out to us and we will be happy to help.**
+
 ### Python-specific data
 
 The featurized files contain bond and atom features as lists of dictionaries and are quite large. If you are using Python, it is far more convenient to use the folder `rdkit_folder.tar.gz`. This folder contains files in which the conformer coordinates are replaced by RDKit `mol` objects. These objects contain both the coordinates and all the connectivity information contained in the `featurized` files, but use far less disk space. Moreover, with RDKit you can generate your own 2D and 3D descriptors in a very straightforward way. The [RDKit tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/02_loading_rdkit_mols.ipynb) shows how to load the RDKit files, visualize conformers, generate additional descriptors, and export to PDB. If you are not familiar with RDKit, you can get started at the [RDKit home page](https://www.rdkit.org/docs/index.html).
@@ -60,6 +62,10 @@ The featurized files contain bond and atom features as lists of dictionaries and
 Finally, you may want to analyze only a few molecules based on certain properties (e.g., load 200 molecules that bind SARS-CoV 3CL protease, and 1000 that do not). However, you may not want to first load *all* molecules and *then* filter by properties. In this case you can load the files `rdkit_folder/{drugs,qm9}_summary.json`, which contain all the summary statistics for each molecule, but exclude conformer information. You can use these lightweight files to decide which molecules to load, and then load their RDKit pickle files one-by-one. This, too, is described in the [RDKit tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/02_loading_rdkit_mols.ipynb).
 
 
+### Data updates
+We have updated the GEOM dataset since our paper was first posted on the ArXiv, adding about 13,000 new drug-like molecules, including about 6,000 with SARS-CoV-2 data. To make sure that you have the latest version of the data, please see the `README` file in the [data folder](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). This explains how you can generate a checksum and confirm that it matches ours. If it matches then you have the latest version of the data.
 
 
+## Training machine learning models
+To train conformer-based machine learning models you can use the [Neural Force Field](https://github.com/learningmatter-mit/NeuralForceField) repository. In particular, you can navigate to the Cp3D tutorial to see how the models get created and trained, or `scripts/cp3d` to learn how to run training scripts.
 
