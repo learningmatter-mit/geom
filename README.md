@@ -63,7 +63,7 @@ Finally, you may want to analyze only a few molecules based on certain propertie
 
 
 ### Data updates
-We have updated the GEOM dataset since our paper was first posted on the ArXiv, adding about 13,000 new drug-like molecules, including about 6,000 with SARS-CoV-2 data. To make sure that you have the latest version of the data, please see the `README` file in the [data folder](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). This explains how you can generate a checksum and confirm that it matches ours. If it matches then you have the latest version of the data.
+We have updated the GEOM dataset since our paper was first posted on the ArXiv, adding about 13,000 new drug-like molecules, including about 6,000 with SARS-CoV-2 data. To make sure that you have the latest version of the data, please see the `README` file in the [data folder](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). This explains how you can generate a checksum and confirm that it matches ours. If it matches then you have the latest version of the data. If not you will want to download it again.
 
 
 ## Training machine learning models
