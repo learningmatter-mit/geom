@@ -67,5 +67,5 @@ We have updated the GEOM dataset since our paper was first posted on the ArXiv, 
 
 
 ## Training machine learning models
-To train conformer-based machine learning models on the GEOM data, you can use the [Neural Force Field](https://github.com/learningmatter-mit/NeuralForceField) repository. In particular, you can navigate to the Cp3D tutorial to see how the models are created and trained, or to `scripts/cp3d` to learn how to run training scripts.
+To train conformer-based machine learning models on the GEOM data, you can use the [Neural Force Field](https://github.com/learningmatter-mit/NeuralForceField) repository. In particular, you can navigate to the Cp3D tutorial to see how the models are created and trained, and to `scripts/cp3d` to learn how to run training scripts.
 
