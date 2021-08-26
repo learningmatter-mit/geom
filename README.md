@@ -51,7 +51,7 @@ python -m ipykernel install --user --name geom --display-name "Python [conda env
 
 ### Language-agnostic data
 
-The datasets are available [here](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). There are four datasets that can be loaded by any programming language. They are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [first tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/01_loading_data.ipynb) gives instructions for extracting the files and loading their content using [MessagePack](https://msgpack.org/index.html). MessagePack is a binary serialization format that allows you to exchange information among different languages, like JSON, but it is faster and more compact. 
+The datasets are available [here](https://doi.org/10.7910/DVN/JNGTDF). There are four datasets that can be loaded by any programming language. They are `drugs_crude.msgpack.tar.gz`, `drugs_featurized.msgpack.tar.gz`, `qm9_crude.msgpack.tar.gz`, `qm9_featurized.msgpack.tar.gz`. The [first tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/01_loading_data.ipynb) gives instructions for extracting the files and loading their content using [MessagePack](https://msgpack.org/index.html). MessagePack is a binary serialization format that allows you to exchange information among different languages, like JSON, but it is faster and more compact. 
 
 **Note: we will be updating the Python-specific data below as we add new molecules to GEOM, but we will not be updating the MessagePack files. If you want the new molecules but you don't use Python, please reach out to us and we will be happy to help.**
 
@@ -63,7 +63,7 @@ Finally, you may want to analyze only a few molecules based on certain propertie
 
 
 ### Data updates
-We have updated the GEOM dataset since our paper was first posted on the ArXiv, adding about 13,000 new drug-like molecules, including about 6,000 with SARS-CoV-2 data. To make sure that you have the latest version of the data, please see the `README` file in the [data folder](https://www.dropbox.com/sh/1aptf9fi8kyrzg6/AABQ4F7dpl4tQ_pGCf2izd7Ca?dl=0). This explains how you can generate a checksum and confirm that it matches ours. If it matches then you have the latest version of the data. If not you will want to download it again.
+We have updated the GEOM dataset since our paper was first posted on the ArXiv, adding about 13,000 new drug-like molecules, including about 6,000 with SARS-CoV-2 data. To make sure that you have the latest version of the data, please see the `README` file in the [data folder](https://doi.org/10.7910/DVN/JNGTDF). This explains how you can generate a checksum and confirm that it matches ours. If it matches then you have the latest version of the data. If not you will want to download it again.
 
 
 ## Training machine learning models
