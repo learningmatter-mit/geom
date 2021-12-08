@@ -18,6 +18,7 @@ from ase import Atoms
 try:
     from nff.utils.geom import compute_distances
     from nff.data import Dataset
+    from nff.utils.constants import AU_TO_KCAL
 except ImportError:
     print(("Could not import NFF utils for efficiently computing distances between "
            "conformers. Please install NFF from https://github.com/learningmatter-mit"
@@ -249,7 +250,7 @@ def plot_geometry_changes(output_dic):
         fig, ax = plt.subplots()
         plt.hist(sub_dic['rmsds'])
         plt.text(0.52, 0.75, "RMSD = %.2f $\\pm$\n %.2f $\\AA$" % (sub_dic['mean'],
-                                                                sub_dic['std']),
+                                                                   sub_dic['std']),
                  transform=ax.transAxes)
         plt.xlabel(r"RMSD ($\AA$)")
         plt.ylabel("Count")
@@ -319,3 +320,142 @@ def plot_en_changes(en_results):
             mean, std),
             transform=ax.transAxes)
         plt.show()
+
+
+def dft_ens_for_comparison(crest_dict,
+                           censo_dict,
+                           censo_to_closest_crest,
+                           dft_name,
+                           method):
+
+    common_smiles = [key for key in crest_dict.keys()
+                     if key in censo_dict.keys()]
+
+    opt_dft_ens = {}
+    sp_dft_ens = {}
+    opt_dft_free_ens = {}
+
+    for smiles in tqdm(common_smiles):
+
+        censo_confs = censo_dict[smiles]
+        crest_confs = crest_dict[smiles]
+
+        opt_dft_ens[smiles] = []
+        opt_dft_free_ens[smiles] = []
+        sp_dft_ens[smiles] = []
+
+        for i, censo_conf in enumerate(censo_confs):
+            if method == 'closest':
+                confnum = censo_conf['confnum']
+                matching_crest_confs = [conf for conf in crest_confs if
+                                        conf.get('confnum') == confnum]
+
+                if len(matching_crest_confs) != 1:
+                    continue
+                crest_conf = matching_crest_confs[0]
+
+            else:
+                idx = censo_to_closest_crest[smiles][i]
+                crest_conf = crest_confs[idx]
+
+            if dft_name not in crest_conf:
+                continue
+
+            # import pdb
+            # pdb.set_trace()
+
+            opt_dft_ens[smiles].append(censo_conf['totalenergy'])
+            opt_dft_free_ens[smiles].append(censo_conf['deltaGtot'])
+            sp_dft_ens[smiles].append(crest_conf[dft_name]['totalenergy'])
+
+        for dic in [opt_dft_ens, opt_dft_free_ens, sp_dft_ens]:
+            ens = np.array(dic[smiles])
+            if len(ens) == 0:
+                dic.pop(smiles)
+                continue
+
+            ens -= np.min(ens)
+            ens *= AU_TO_KCAL['energy']
+            dic[smiles] = ens
+
+    return opt_dft_ens, opt_dft_free_ens, sp_dft_ens
+
+
+def get_spearmans(dic,
+                  other_dic):
+    rhos = []
+
+    for key, these_ens in dic.items():
+        other_ens = other_dic[key]
+        assert len(these_ens) == len(other_ens)
+
+        spear = spearmanr(these_ens, other_ens)
+        rho = spear.correlation
+        rhos.append(rho)
+
+    return rhos
+
+
+def get_and_plot_rho(dic,
+                     other_dic,
+                     title):
+
+    rhos = get_spearmans(dic=dic,
+                         other_dic=other_dic)
+
+    rhos = np.array(rhos)
+    rhos = rhos[np.isfinite(rhos)]
+
+    mean = np.mean(rhos)
+    std = np.std(rhos)
+
+    fig, ax = plt.subplots()
+    plt.hist(rhos)
+    plt.title(title, fontsize=18)
+    plt.text(0.03, 0.8, r"$\rho = %.2f \pm %.2f$" % (mean,
+                                                     std),
+             transform=ax.transAxes)
+    plt.xlabel(r"Spearman $\rho$")
+    plt.ylabel("Count")
+    plt.show()
+
+
+def get_rel_en(sub_dics, key):
+    ens = [i[key] for i in sub_dics]
+    ens = np.array(ens)
+    ens -= np.min(ens)
+    ens *= AU_TO_KCAL['energy']
+
+    return ens
+
+
+def plot_energy_comparison(crest_dict,
+                           censo_dict,
+                           censo_to_closest_crest,
+                           dft_name):
+
+    methods = ['opt', 'closest']
+    for method in methods:
+        out = dft_ens_for_comparison(crest_dict=crest_dict,
+                                     censo_dict=censo_dict,
+                                     censo_to_closest_crest=censo_to_closest_crest,
+                                     dft_name=dft_name,
+                                     method=method)
+
+        opt_dft_ens, opt_dft_free_ens, sp_dft_ens = out
+
+        get_and_plot_rho(dic=opt_dft_ens,
+                         other_dic=sp_dft_ens,
+                         title=('DFT single point vs. opt energetic\n'
+                                'ordering, %s') % (TRANSLATION[method]))
+
+
+def plot_free_en_comparison(censo_dict):
+    censo_ens = {smiles: get_rel_en(sub_dics, 'totalenergy')
+                 for smiles, sub_dics in censo_dict.items()}
+    censo_free_ens = {smiles: get_rel_en(sub_dics, 'deltaGtot')
+                      for smiles, sub_dics in censo_dict.items()}
+
+    get_and_plot_rho(dic=censo_ens,
+                     other_dic=censo_free_ens,
+                     title='DFT energy vs. free energy')
