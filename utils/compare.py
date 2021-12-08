@@ -19,10 +19,12 @@ try:
     from nff.utils.geom import compute_distances
     from nff.data import Dataset
     from nff.utils.constants import AU_TO_KCAL
-except ImportError:
+except ImportError as e:
+    print(e)
     print(("Could not import NFF utils for efficiently computing distances between "
-           "conformers. Please install NFF from https://github.com/learningmatter-mit"
-           "/NeuralForceField and put it in your path."))
+           "conformers. Please check the error message, and make sure you have NFF "
+           "installed and in your path. You can download it at https://github.com"
+           "/learningmatter-mit/NeuralForceField and put it in your path."))
 
 TRANSLATION = {"opt": "relative to seed CREST conf",
                "closest": "relative to closest CREST conf"}
