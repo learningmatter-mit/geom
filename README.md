@@ -33,7 +33,7 @@ ase==3.22.1
 pytorch==1.4.0 
 scikit-learn==0.23.2 
 nglview==3.0.3
-sympy==0.19 
+sympy==1.9 
 networkx==2.6.3
 ```
 
