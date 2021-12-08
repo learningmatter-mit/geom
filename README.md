@@ -33,6 +33,8 @@ ase==3.22.1
 pytorch==1.4.0 
 scikit-learn==0.23.2 
 nglview==3.0.3
+sympy==0.19 
+networkx==2.6.3
 ```
 
 You can create an [anaconda](https://conda.io/docs/index.html) environment to manage dependencies. You can learn more about managing anaconda environments by reading [this page](http://conda.pydata.org/). First create an environment with Python, RDKit, and Matplotlib:
