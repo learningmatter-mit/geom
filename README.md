@@ -29,13 +29,14 @@ rdkit==2020.03.2.0,
 matplotlib==3.2.1,
 e3fp==1.2.1
 tqdm==4.62.1
+ase==3.22.1
 ```
 
 You can create an [anaconda](https://conda.io/docs/index.html) environment to manage dependencies. You can learn more about managing anaconda environments by reading [this page](http://conda.pydata.org/). First create an environment with Python, RDKit, and Matplotlib:
 
 ```bash
 conda upgrade conda
-conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 tqdm==4.62.1 -c rdkit -c conda-forge 
+conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 tqdm==4.62.1 ase==3.22.1 pytorch==1.4.0 -c rdkit -c conda-forge -c pytorch
 
 ```
 Next activate the environment and install `msgpack`, `ipykernel`, and `e3fp`:
