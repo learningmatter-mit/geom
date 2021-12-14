@@ -89,6 +89,17 @@ def align_censo_crest(censo_dict,
 
     for censo_conf_dic in censo_confs:
         confnum = censo_conf_dic['confnum']
+
+        # some conformers cannot be reliably traced
+        # back to a CREST conformer, because they were
+        # incorrectly distorted by Orca 5.0.1 during the
+        # optimization. These have to stay in the ensemble
+        # because other conformers with the same structure
+        # may have been removed as duplicates, so we had to leave them.
+
+        if not censo_conf_dic['trust_confnum']:
+            continue
+
         try:
             crest_idx = [i for i, dic in enumerate(crest_confs)
                          if dic['confnum'] == confnum][0]
@@ -349,6 +360,8 @@ def dft_ens_for_comparison(crest_dict,
         for i, censo_conf in enumerate(censo_confs):
             if method == 'closest':
                 confnum = censo_conf['confnum']
+                if not censo_conf['trust_confnum']:
+                    continue
                 matching_crest_confs = [conf for conf in crest_confs if
                                         conf.get('confnum') == confnum]
 
