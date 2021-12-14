@@ -376,9 +376,6 @@ def dft_ens_for_comparison(crest_dict,
             if dft_name not in crest_conf:
                 continue
 
-            # import pdb
-            # pdb.set_trace()
-
             opt_dft_ens[smiles].append(censo_conf['totalenergy'])
             opt_dft_free_ens[smiles].append(censo_conf['deltaGtot'])
             sp_dft_ens[smiles].append(crest_conf[dft_name]['totalenergy'])
