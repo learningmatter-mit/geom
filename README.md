@@ -44,7 +44,7 @@ conda upgrade conda
 conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 tqdm==4.62.1 ase==3.22.1 pytorch==1.4.0 scikit-learn==0.23.2 -c rdkit -c conda-forge -c pytorch -c anaconda
 
 ```
-Next activate the environment and install `msgpack`, `ipykernel`, and `e3fp`:
+Next activate the environment and install `pip` packages:
 ```bash
 conda activate geom
 pip install msgpack==1.0.0 ipykernel==6.6.0 e3fp==1.2.1 nglview==3.0.3 sympy==1.9 networkx==2.6.3
