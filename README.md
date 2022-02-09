@@ -22,7 +22,7 @@ This repository contains [Jupyter notebook tutorials](https://github.com/learnin
 ## Usage
 This code was tested with the following dependencies:
 ```
-python==3.7.5,
+python==3.7.10,
 mgspack==1.0.3,
 ipykernel==6.9.0,
 rdkit==2020.09.1,
@@ -41,7 +41,7 @@ You can create an [anaconda](https://conda.io/docs/index.html) environment to ma
 
 ```bash
 conda upgrade conda
-conda create -n geom python==3.7.5 rdkit==2020.09.1 matplotlib==3.2.2 tqdm==4.62.3 ase==3.22.1 pytorch==1.4.0 scikit-learn==1.0.2 -c rdkit -c conda-forge -c pytorch -c anaconda
+conda create -n geom python==3.7.10 rdkit==2020.09.1 matplotlib==3.2.2 tqdm==4.62.3 ase==3.22.1 pytorch==1.4.0 scikit-learn==1.0.2 -c rdkit -c conda-forge -c pytorch -c anaconda
 
 ```
 Next activate the environment and install `pip` packages:
