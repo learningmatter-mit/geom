@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 import pickle
 from tqdm import tqdm
 from scipy.stats import spearmanr
-
+from sklearn.metrics import r2_score
 
 from ase.build.rotate import minimize_rotation_and_translation as align
 from ase import Atoms
@@ -30,6 +30,8 @@ except ImportError as e:
 TRANSLATION = {"opt": "relative to seed CREST conf",
                "closest": "relative to closest CREST conf"}
 rcParams.update({"font.size": 20})
+
+DPI = 300
 
 
 def load_pickle(direc, max_num=None):
@@ -289,6 +291,8 @@ def plot_geometry_changes(output_dic,
         sim_type = TRANSLATION[key]
         title = "CENSO vs. CREST geometries,\n %s" % sim_type
 
+        print(title)
+
         fig, ax = plt.subplots()
         plt.hist(sub_dic['rmsds'])
         plt.text(0.55, 0.7, "RMSD = %.2f $\\pm$\n %.2f $\\AA$" % (sub_dic['mean'],
@@ -297,7 +301,7 @@ def plot_geometry_changes(output_dic,
                  fontsize=16)
         plt.xlabel(r"RMSD ($\AA$)")
         plt.ylabel("Count")
-        plt.title(title, fontsize=18)
+        # plt.title(title, fontsize=16)
         [i.set_linewidth(2) for i in ax.spines.values()]
         plt.tight_layout()
 
@@ -305,7 +309,8 @@ def plot_geometry_changes(output_dic,
             save_path = get_save_path(save_dir=save_dir,
                                       save_name=save_name,
                                       key=key)
-            plt.savefig(save_path)
+            plt.savefig(save_path,
+                        dpi=DPI)
         plt.show()
 
 
@@ -480,12 +485,12 @@ def plot_en_changes(en_results,
         mean = np.mean(spearman)
         std = np.std(spearman)
 
-        title = "CREST vs. CENSO energetic ordering,\n %s" % sim_type
+        # title = "CREST vs. CENSO energetic ordering,\n %s" % sim_type
 
         fig, ax = plt.subplots()
         plt.hist(spearman)
-        plt.title(title, fontsize=18)
-        plt.xlabel(r"Spearman $\rho$")
+        # plt.title(title, fontsize=18)
+        plt.xlabel(r"CREST / CENSO Spearman $\rho$")
         plt.ylabel("Count")
         plt.text(0.03, 0.8, r"$\rho = %.2f \pm %.2f$" % (
             mean, std),
@@ -498,7 +503,7 @@ def plot_en_changes(en_results,
             save_path = get_save_path(save_dir=save_dir,
                                       save_name=save_name,
                                       key=sim_type)
-            plt.savefig(save_path)
+            plt.savefig(save_path, dpi=DPI)
 
         plt.show()
 
@@ -533,7 +538,7 @@ def plot_crest_sp_ens(sp_en_results,
         save_path = get_save_path(save_dir=save_dir,
                                   save_name=save_name,
                                   key=None)
-        plt.savefig(save_path)
+        plt.savefig(save_path, dpi=DPI)
 
     plt.show()
 
@@ -568,7 +573,7 @@ def plot_pct_contained(en_results,
             save_path = get_save_path(save_dir=save_dir,
                                       save_name=save_name,
                                       key=sim_type)
-            plt.savefig(save_path)
+            plt.savefig(save_path, dpi=DPI)
 
         plt.show()
 
@@ -603,7 +608,7 @@ def plot_rel_increase(en_results,
             save_path = get_save_path(save_dir=save_dir,
                                       save_name=save_name,
                                       key=sim_type)
-            plt.savefig(save_path)
+            plt.savefig(save_path, dpi=DPI)
 
         plt.show()
 
@@ -701,7 +706,8 @@ def get_and_plot_rho(dic,
                      title,
                      key,
                      save_dir=None,
-                     save_name=None):
+                     save_name=None,
+                     spear_name=None):
 
     rhos = get_spearmans(dic=dic,
                          other_dic=other_dic)
@@ -712,14 +718,20 @@ def get_and_plot_rho(dic,
     mean = np.mean(rhos)
     std = np.std(rhos)
 
+    if spear_name is not None:
+        xlabel = r"%s Spearman $\rho$" % spear_name
+    else:
+        xlabel = r"Spearman $\rho$"
+
     fig, ax = plt.subplots()
     plt.hist(rhos)
-    plt.title(title, fontsize=18)
+    if title is not None:
+        plt.title(title, fontsize=18)
     plt.text(0.03, 0.8, r"$\rho = %.2f \pm %.2f$" % (mean,
                                                      std),
              transform=ax.transAxes,
              fontsize=16)
-    plt.xlabel(r"Spearman $\rho$")
+    plt.xlabel(xlabel)
     plt.ylabel("Count")
     [i.set_linewidth(2) for i in ax.spines.values()]
     plt.tight_layout()
@@ -728,7 +740,7 @@ def get_and_plot_rho(dic,
         save_path = get_save_path(save_dir=save_dir,
                                   save_name=save_name,
                                   key=key)
-        plt.savefig(save_path)
+        plt.savefig(save_path, dpi=DPI)
     plt.show()
 
 
@@ -778,10 +790,12 @@ def plot_free_en_comparison(censo_dict,
 
     get_and_plot_rho(dic=censo_ens,
                      other_dic=censo_free_ens,
-                     title='DFT energy vs. free energy',
+                     # title='DFT energy vs. free energy',
+                     title=None,
                      save_dir=save_dir,
                      save_name=save_name,
-                     key=None)
+                     key=None,
+                     spear_name='G/E')
 
 
 def get_sp_and_crest_ens(crest_dict,
@@ -824,6 +838,9 @@ def plot_conf_ens(rel_crest_ens,
                   save_path):
 
     ideal = np.linspace(min(rel_crest_ens), max(rel_crest_ens), 100)
+    mae = abs(rel_crest_ens - rel_dft_ens).mean()
+    rho = spearmanr(rel_crest_ens, rel_dft_ens).correlation
+
     fig, ax = plt.subplots()
     plt.hexbin(rel_crest_ens,
                rel_dft_ens,
@@ -832,11 +849,17 @@ def plot_conf_ens(rel_crest_ens,
     plt.plot(ideal, ideal, '--',
              linewidth=3,
              color='white')
-    plt.xlabel("CREST (kcal/mol)")
+    plt.xlabel("GFN2-xTB (kcal/mol)")
     plt.ylabel("r2scan-3c (kcal/mol)")
     plt.tight_layout()
+    plt.text(0.035, 0.87, r"$\mathrm{MAE} = %.2f$ kcal/mol" % mae,
+             transform=ax.transAxes,
+             fontsize=16)
+    plt.text(0.035, 0.77, r"$\rho = %.2f$" % rho,
+             transform=ax.transAxes,
+             fontsize=16)
     [i.set_linewidth(2) for i in ax.spines.values()]
-    plt.savefig(save_path)
+    plt.savefig(save_path, dpi=DPI)
     plt.show()
 
 
@@ -859,10 +882,10 @@ def plot_conf_rhos(rho_scores,
              fontsize=16)
     plt.hist(rho_scores)
     plt.ylabel("Count")
-    plt.xlabel(r"Spearman $\rho$")
+    plt.xlabel(r"xTB / r2scan Spearman $\rho$")
     [i.set_linewidth(2) for i in ax.spines.values()]
     plt.tight_layout()
-    plt.savefig(save_path)
+    plt.savefig(save_path, dpi=DPI)
     plt.show()
 
 
@@ -886,7 +909,9 @@ def plot_crest_vs_sp(crest_dict,
         rel_crest_ens, rel_dft_ens, rho_scores = out
 
         mae = abs(rel_crest_ens - rel_dft_ens).mean()
+        r2 = r2_score(rel_crest_ens, rel_dft_ens)
         print("MAE: %.2f kcal/mol" % mae)
+        print("R^2: %.2f" % r2)
 
         save_path = os.path.join(
             save_dir, 'mae_sp_cutoff_%d.png' % (int(cutoff * 100)))
