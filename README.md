@@ -1,6 +1,6 @@
 # GEOM: Energy-annotated molecular conformations 
 
-GEOM is a dataset with over 30 million molecular conformations annotated by energy and statistical weight for over 400,000 molecules. If you use this data, please cite
+GEOM is a dataset with 37 million molecular conformations annotated by energy and statistical weight for over 450,000 molecules. If you use this data, please cite
 
 Axelrod, S. and Gomez-Bombarelli, R., "GEOM: Energy-annotated molecular conformations for property prediction and molecular generation". arXiv preprint arXiv:2006.05531 (2020). Link: https://arxiv.org/pdf/2006.05531.pdf
 
@@ -22,16 +22,16 @@ This repository contains [Jupyter notebook tutorials](https://github.com/learnin
 ## Usage
 This code was tested with the following dependencies:
 ```
-python==3.7.5,
-mgspack==1.0.0,
-ipykernel==5.3.0,
-rdkit==2020.03.2.0,
-matplotlib==3.2.1,
-e3fp==1.2.1
-tqdm==4.62.1
+python==3.7.10,
+mgspack==1.0.3,
+ipykernel==6.9.0,
+rdkit==2020.09.1,
+matplotlib==3.2.2,
+e3fp==1.2.3
+tqdm==4.62.3
 ase==3.22.1
 pytorch==1.4.0 
-scikit-learn==0.23.2 
+scikit-learn==1.0.2 
 nglview==3.0.3
 sympy==1.9 
 networkx==2.6.3
@@ -41,13 +41,13 @@ You can create an [anaconda](https://conda.io/docs/index.html) environment to ma
 
 ```bash
 conda upgrade conda
-conda create -n geom python==3.7.5 rdkit==2020.03.2.0 matplotlib==3.2.1 tqdm==4.62.1 ase==3.22.1 pytorch==1.4.0 scikit-learn==0.23.2 -c rdkit -c conda-forge -c pytorch -c anaconda
+conda create -n geom python==3.7.10 rdkit==2020.09.1 matplotlib==3.2.2 tqdm==4.62.3 ase==3.22.1 pytorch==1.4.0 scikit-learn==1.0.2 -c rdkit -c conda-forge -c pytorch -c anaconda
 
 ```
-Next activate the environment and install `msgpack`, `ipykernel`, and `e3fp`:
+Next activate the environment and install `pip` packages:
 ```bash
 conda activate geom
-pip install msgpack==1.0.0 ipykernel==6.6.0 e3fp==1.2.1 nglview==3.0.3 sympy==1.9 networkx==2.6.3
+pip install msgpack==1.0.3 ipykernel==6.9.0 e3fp==1.2.3 nglview==3.0.3 sympy==1.9 networkx==2.6.3
 ```
 To ensure that the `geom` environment is accessible through Jupyter, add the the `geom` display name:
 ```bash
@@ -70,7 +70,9 @@ Finally, you may want to analyze only a few molecules based on certain propertie
 
 
 ### Data updates
-We have updated the GEOM dataset since our paper was first posted on the ArXiv, adding about 13,000 new drug-like molecules, including about 6,000 with SARS-CoV-2 data. To make sure that you have the latest version of the data, please see the `README` file in the [data folder](https://doi.org/10.7910/DVN/JNGTDF). This explains how you can generate a checksum and confirm that it matches ours. If it matches then you have the latest version of the data. If not you will want to download it again.
+1. **New drug-like molecules** (Feb. 1, 2021). We have updated the GEOM dataset since our paper was first posted on the ArXiv, adding about 13,000 new drug-like molecules, including about 6,000 with SARS-CoV-2 data. To make sure that you have the latest version of the data, please see the `README` file in the [data folder](https://doi.org/10.7910/DVN/JNGTDF). This explains how you can generate a checksum and confirm that it matches ours. If it matches then you have the latest version of the data. If not you will want to download it again.
+
+2. **MoleculeNet** (Feb. 9, 2022). We have added over 16,000 species from the MoleculeNet dataset. These species have data related to physical chemistry, physiology, and biophysics. These results can be found with the rest of the data [here](https://doi.org/10.7910/DVN/JNGTDF). The data contains CREST ensembles for the species, together with Hessian data and high-accuracy DFT results for the BACE subset. To load this data, see our [MoleculeNet tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/03_loading_molecule_net.ipynb). To see how to compare results from different levels of theory, see our [comparison tutorial](https://github.com/learningmatter-mit/geom/blob/master/tutorials/04_comparing_ensembles.ipynb).
 
 
 ## Training machine learning models
