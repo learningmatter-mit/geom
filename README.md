@@ -2,7 +2,7 @@
 
 GEOM is a dataset with 37 million molecular conformations annotated by energy and statistical weight for over 450,000 molecules. If you use this data, please cite
 
-Axelrod, S. and Gomez-Bombarelli, R., "GEOM: Energy-annotated molecular conformations for property prediction and molecular generation". arXiv preprint arXiv:2006.05531 (2020). Link: https://arxiv.org/pdf/2006.05531.pdf
+Axelrod, S. and Gómez-Bombarelli, R. GEOM, energy-annotated molecular conformations for property prediction and molecular generation. *Scientific Data* 9, **185** (2022). https://doi.org/10.1038/s41597-022-01288-4
 
 Bibtex format:
 
