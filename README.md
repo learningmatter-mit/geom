@@ -7,11 +7,16 @@ Axelrod, S. and Gomez-Bombarelli, R., "GEOM: Energy-annotated molecular conforma
 Bibtex format:
 
 ```
-@article{axelrod2020geom,
-  title={GEOM: Energy-annotated molecular conformations for property prediction and molecular generation},
-  author={Axelrod, Simon and Gomez-Bombarelli, Rafael},
-  journal={arXiv preprint arXiv:2006.05531},
-  year={2020}
+@article{axelrod2022geom,
+	author = {Axelrod, Simon and G{\'o}mez-Bombarelli, Rafael},
+	doi = {10.1038/s41597-022-01288-4},
+	journal = {Scientific Data},
+	number = {1},
+	pages = {185},
+	title = {GEOM, energy-annotated molecular conformations for property prediction and molecular generation},
+	url = {https://doi.org/10.1038/s41597-022-01288-4},
+	volume = {9},
+	year = {2022}
 }
 ```
 
