@@ -8,15 +8,15 @@ Bibtex format:
 
 ```
 @article{axelrod2022geom,
-	author = {Axelrod, Simon and G{\'o}mez-Bombarelli, Rafael},
-	doi = {10.1038/s41597-022-01288-4},
-	journal = {Scientific Data},
-	number = {1},
-	pages = {185},
-	title = {GEOM, energy-annotated molecular conformations for property prediction and molecular generation},
-	url = {https://doi.org/10.1038/s41597-022-01288-4},
-	volume = {9},
-	year = {2022}
+	 author = {Axelrod, Simon and G{\'o}mez-Bombarelli, Rafael},
+	 doi = {10.1038/s41597-022-01288-4},
+	 journal = {Scientific Data},
+	 number = {1},
+	 pages = {185},
+	 title = {GEOM, energy-annotated molecular conformations for property prediction and molecular generation},
+	 url = {https://doi.org/10.1038/s41597-022-01288-4},
+	 volume = {9},
+	 year = {2022}
 }
 ```
 
